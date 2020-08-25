@@ -1,7 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { View, ScrollView, Text, FlatList } from "react-native";
 import { Card, ListItem } from "react-native-elements";
-import { LEADERS } from "../shared/leaders";
+import { baseUrl } from "../shared/baseUrl";
+
+const mapStateToProps = (state) => {
+  return {
+    leaders: state.leaders,
+  };
+};
 
 const historyData = [
   "Started in 2010, Ristorante con Fusion quickly established itself as aculinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong. Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.",
@@ -25,7 +32,7 @@ const renderLeader = ({ item, index }) => {
       title={item.name}
       subtitle={item.description}
       hideChevron={true}
-      leftAvatar={{ source: require("./images/alberto.png") }}
+      leftAvatar={{ source: { uri: baseUrl + item.image } }}
     />
   );
 };
@@ -45,21 +52,13 @@ const CorporateLeadership = ({ leaders }) => {
   return <View />;
 };
 
-class ContactUs extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      leaders: LEADERS,
-    };
-  }
-  render() {
-    return (
-      <ScrollView>
-        <History />
-        <CorporateLeadership leaders={this.state.leaders} />
-      </ScrollView>
-    );
-  }
+function AboutUs({ leaders }) {
+  return (
+    <ScrollView>
+      <History />
+      <CorporateLeadership leaders={leaders.leaders} />
+    </ScrollView>
+  );
 }
 
-export default ContactUs;
+export default connect(mapStateToProps)(AboutUs);
