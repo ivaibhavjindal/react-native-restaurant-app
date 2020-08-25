@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { View, ScrollView, Text, FlatList } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 import { baseUrl } from "../shared/baseUrl";
+import Loading from "./LoadingComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -53,12 +54,32 @@ const CorporateLeadership = ({ leaders }) => {
 };
 
 function AboutUs({ leaders }) {
-  return (
-    <ScrollView>
-      <History />
-      <CorporateLeadership leaders={leaders.leaders} />
-    </ScrollView>
-  );
+  if (leaders.isLoading) {
+    return (
+      <ScrollView>
+        <History />
+        <Card title={"Corporate Leadership"}>
+          <Loading />
+        </Card>
+      </ScrollView>
+    );
+  } else if (leaders.errMess) {
+    return (
+      <ScrollView>
+        <History />
+        <Card title={"Corporate Leadership"}>
+          <Text>{leaders.errMess}</Text>
+        </Card>
+      </ScrollView>
+    );
+  } else {
+    return (
+      <ScrollView>
+        <History />
+        <CorporateLeadership leaders={leaders.leaders} />
+      </ScrollView>
+    );
+  }
 }
 
 export default connect(mapStateToProps)(AboutUs);

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList } from "react-native";
+import { FlatList, View, Text } from "react-native";
 import { Tile } from "react-native-elements";
 import { baseUrl } from "../shared/baseUrl";
+import Loading from "./LoadingComponent";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,13 +27,22 @@ class Menu extends Component {
       );
     };
 
-    return (
-      <FlatList
-        data={dishes.dishes}
-        renderItem={renderMenuItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    );
+    if (dishes.loading) return <Loading />;
+    else if (dishes.errMess)
+      return (
+        <View>
+          <Text>{dishes.errMess}</Text>
+        </View>
+      );
+    else {
+      return (
+        <FlatList
+          data={dishes.dishes}
+          renderItem={renderMenuItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      );
+    }
   }
 }
 

@@ -26,6 +26,9 @@ import {
   fetchPromos,
   fetchLeaders,
 } from "../redux/ActionCreators";
+import { baseUrl } from "../shared/baseUrl";
+
+const logoImageUrl = baseUrl + "images/logo.png";
 
 const mapDispatchToProps = (dispatch) => ({
   fetchDishes: () => dispatch(fetchDishes()),
@@ -166,10 +169,7 @@ const CustomDrawerContentComponent = (props) => (
     >
       <View style={styles.drawerHeader}>
         <View style={{ flex: 1 }}>
-          <Image
-            source={require("./images/logo.png")}
-            style={styles.drawerImage}
-          />
+          <Image source={{ uri: logoImageUrl }} style={styles.drawerImage} />
         </View>
         <View style={{ flex: 2 }}>
           <Text style={styles.drawerHeaderText}>Ristorante Con Fusion</Text>
