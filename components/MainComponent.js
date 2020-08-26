@@ -20,6 +20,7 @@ import Home from "./HomeComponent";
 import ContactUs from "./ContactUsComponent";
 import AboutUs from "./AboutUsComponent";
 import DishDetail from "./DishDetailComponent";
+import Reservation from "./ReservationComponent";
 import {
   fetchDishes,
   fetchComments,
@@ -41,6 +42,7 @@ const MenuStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 const ContactUsStack = createStackNavigator();
 const AboutUsStack = createStackNavigator();
+const ReservationStack = createStackNavigator();
 const MainDrawer = createDrawerNavigator();
 
 const MenuNavigator = () => (
@@ -54,11 +56,11 @@ const MenuNavigator = () => (
       headerTitleStyle: {
         color: "#fff",
       },
-      headerLeft: () => (
+      headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
           size={24}
-          color="white"
+          color={tintColor}
           onPress={navigation.toggleDrawer}
         />
       ),
@@ -87,11 +89,11 @@ const HomeNavigator = () => (
       headerTitleStyle: {
         color: "#fff",
       },
-      headerLeft: () => (
+      headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
           size={24}
-          color="white"
+          color={tintColor}
           onPress={navigation.toggleDrawer}
         />
       ),
@@ -115,11 +117,11 @@ const ContactUsNavigator = () => (
       headerTitleStyle: {
         color: "#fff",
       },
-      headerLeft: () => (
+      headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
           size={24}
-          color="white"
+          color={tintColor}
           onPress={navigation.toggleDrawer}
         />
       ),
@@ -143,11 +145,11 @@ const AboutUsNavigator = () => (
       headerTitleStyle: {
         color: "#fff",
       },
-      headerLeft: () => (
+      headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
           size={24}
-          color="white"
+          color={tintColor}
           onPress={navigation.toggleDrawer}
         />
       ),
@@ -159,6 +161,34 @@ const AboutUsNavigator = () => (
       options={{ title: "About Us" }}
     />
   </AboutUsStack.Navigator>
+);
+
+const ReservationNavigator = () => (
+  <ReservationStack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#512DA8",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerLeft: ({ tintColor }) => (
+        <Icon
+          name="menu"
+          size={24}
+          color={tintColor}
+          onPress={navigation.toggleDrawer}
+        />
+      ),
+    })}
+  >
+    <ReservationStack.Screen
+      name="Reservation"
+      component={Reservation}
+      options={{ title: "Reserve Table" }}
+    />
+  </ReservationStack.Navigator>
 );
 
 const CustomDrawerContentComponent = (props) => (
@@ -235,6 +265,22 @@ const MainNavigator = () => {
               name="address-card"
               type="font-awesome"
               size={22}
+              color={tintColor}
+            />
+          ),
+        }}
+      />
+      <MainDrawer.Screen
+        name="Reservation"
+        component={ReservationNavigator}
+        options={{
+          title: "Reserve Table",
+          drawerLabel: "Reserve Table",
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name="cutlery"
+              type="font-awesome"
+              size={24}
               color={tintColor}
             />
           ),
