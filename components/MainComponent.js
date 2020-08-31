@@ -21,6 +21,7 @@ import ContactUs from "./ContactUsComponent";
 import AboutUs from "./AboutUsComponent";
 import DishDetail from "./DishDetailComponent";
 import Reservation from "./ReservationComponent";
+import Favorites from "./FavoriteComponent";
 import {
   fetchDishes,
   fetchComments,
@@ -43,6 +44,7 @@ const HomeStack = createStackNavigator();
 const ContactUsStack = createStackNavigator();
 const AboutUsStack = createStackNavigator();
 const ReservationStack = createStackNavigator();
+const FavoritesStack = createStackNavigator();
 const MainDrawer = createDrawerNavigator();
 
 const MenuNavigator = () => (
@@ -191,6 +193,39 @@ const ReservationNavigator = () => (
   </ReservationStack.Navigator>
 );
 
+const FavoritesNavigator = () => (
+  <FavoritesStack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#512DA8",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerLeft: ({ tintColor }) => (
+        <Icon
+          name="menu"
+          size={24}
+          color={tintColor}
+          onPress={navigation.toggleDrawer}
+        />
+      ),
+    })}
+  >
+    <FavoritesStack.Screen
+      name="Favorites"
+      component={Favorites}
+      options={{ title: "My Favorites" }}
+    />
+    <FavoritesStack.Screen
+      name="DishDetail"
+      component={DishDetail}
+      options={{ title: "Dish Detail" }}
+    />
+  </FavoritesStack.Navigator>
+);
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView
@@ -265,6 +300,22 @@ const MainNavigator = () => {
               name="address-card"
               type="font-awesome"
               size={22}
+              color={tintColor}
+            />
+          ),
+        }}
+      />
+      <MainDrawer.Screen
+        name="Favorites"
+        component={FavoritesNavigator}
+        options={{
+          title: "My Favorites",
+          drawerLabel: "My Favorites",
+          drawerIcon: ({ tintColor }) => (
+            <Icon
+              name="heart"
+              type="font-awesome"
+              size={24}
               color={tintColor}
             />
           ),
