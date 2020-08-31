@@ -61,6 +61,7 @@ const MenuNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}
@@ -94,6 +95,7 @@ const HomeNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}
@@ -122,6 +124,7 @@ const ContactUsNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}
@@ -150,6 +153,7 @@ const AboutUsNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}
@@ -178,6 +182,7 @@ const ReservationNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}
@@ -206,6 +211,7 @@ const FavoritesNavigator = () => (
       headerLeft: ({ tintColor }) => (
         <Icon
           name="menu"
+          iconStyle={{ marginLeft: 10 }}
           size={24}
           color={tintColor}
           onPress={navigation.toggleDrawer}

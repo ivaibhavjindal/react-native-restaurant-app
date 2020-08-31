@@ -26,7 +26,7 @@ const History = () => (
   </Card>
 );
 
-const renderLeader = ({ item, index }) => {
+const renderLeader = (item, index) => {
   return (
     <ListItem
       key={index}
@@ -42,11 +42,8 @@ const CorporateLeadership = ({ leaders }) => {
   if (leaders != null) {
     return (
       <Card title={"Corporate Leadership"}>
-        <FlatList
-          data={leaders}
-          renderItem={renderLeader}
-          keyExtractor={(item) => item.id.toString()}
-        />
+        {/* Flatlist inside scrollView gives warning */}
+        {leaders.map((leader, i) => renderLeader(leader, i))}
       </Card>
     );
   }
