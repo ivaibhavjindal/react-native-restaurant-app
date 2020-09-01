@@ -4,6 +4,7 @@ import { FlatList, View, Text } from "react-native";
 import { Tile } from "react-native-elements";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from "./LoadingComponent";
+import * as Animatable from "react-native-animatable";
 
 const mapStateToProps = (state) => {
   return {
@@ -16,14 +17,16 @@ class Menu extends Component {
     const dishes = this.props.dishes;
     const renderMenuItem = ({ item, index }) => {
       return (
-        <Tile
-          key={index}
-          title={item.name}
-          featured
-          caption={item.description}
-          onPress={() => navigate("DishDetail", { dishId: item.id })}
-          imageSrc={{ uri: baseUrl + item.image }}
-        />
+        <Animatable.View animation="fadeInRightBig" duration={2000}>
+          <Tile
+            key={index}
+            title={item.name}
+            featured
+            caption={item.description}
+            onPress={() => navigate("DishDetail", { dishId: item.id })}
+            imageSrc={{ uri: baseUrl + item.image }}
+          />
+        </Animatable.View>
       );
     };
 

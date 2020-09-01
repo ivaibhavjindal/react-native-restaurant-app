@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { View, ScrollView, Text, FlatList } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from "./LoadingComponent";
+import * as Animatable from "react-native-animatable";
 
 const mapStateToProps = (state) => {
   return {
@@ -63,17 +64,21 @@ function AboutUs({ leaders }) {
   } else if (leaders.errMess) {
     return (
       <ScrollView>
-        <History />
-        <Card title={"Corporate Leadership"}>
-          <Text>{leaders.errMess}</Text>
-        </Card>
+        <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+          <History />
+          <Card title={"Corporate Leadership"}>
+            <Text>{leaders.errMess}</Text>
+          </Card>
+        </Animatable.View>
       </ScrollView>
     );
   } else {
     return (
       <ScrollView>
-        <History />
-        <CorporateLeadership leaders={leaders.leaders} />
+        <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+          <History />
+          <CorporateLeadership leaders={leaders.leaders} />
+        </Animatable.View>
       </ScrollView>
     );
   }
