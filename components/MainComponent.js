@@ -263,8 +263,8 @@ const MainNavigator = () => {
         options={{
           title: "Home",
           drawerLabel: "Home",
-          drawerIcon: ({ tintColor }) => (
-            <Icon name="home" type="font-awesome" size={24} color={tintColor} />
+          drawerIcon: ({ color }) => (
+            <Icon name="home" type="font-awesome" size={24} color={color} />
           ),
         }}
       />
@@ -274,12 +274,12 @@ const MainNavigator = () => {
         options={{
           title: "AboutUs",
           drawerLabel: "About Us",
-          drawerIcon: ({ tintColor }) => (
+          drawerIcon: ({ color }) => (
             <Icon
               name="info-circle"
               type="font-awesome"
               size={24}
-              color={tintColor}
+              color={color}
             />
           ),
         }}
@@ -290,8 +290,8 @@ const MainNavigator = () => {
         options={{
           title: "Menu",
           drawerLabel: "Menu",
-          drawerIcon: ({ tintColor }) => (
-            <Icon name="list" type="font-awesome" size={24} color={tintColor} />
+          drawerIcon: ({ color }) => (
+            <Icon name="list" type="font-awesome" size={24} color={color} />
           ),
         }}
       />
@@ -301,12 +301,12 @@ const MainNavigator = () => {
         options={{
           title: "ContactUs",
           drawerLabel: "Contact Us",
-          drawerIcon: ({ tintColor }) => (
+          drawerIcon: ({ color }) => (
             <Icon
               name="address-card"
               type="font-awesome"
               size={22}
-              color={tintColor}
+              color={color}
             />
           ),
         }}
@@ -317,13 +317,8 @@ const MainNavigator = () => {
         options={{
           title: "My Favorites",
           drawerLabel: "My Favorites",
-          drawerIcon: ({ tintColor }) => (
-            <Icon
-              name="heart"
-              type="font-awesome"
-              size={24}
-              color={tintColor}
-            />
+          drawerIcon: ({ color }) => (
+            <Icon name="heart" type="font-awesome" size={24} color={color} />
           ),
         }}
       />
@@ -333,13 +328,8 @@ const MainNavigator = () => {
         options={{
           title: "Reserve Table",
           drawerLabel: "Reserve Table",
-          drawerIcon: ({ tintColor }) => (
-            <Icon
-              name="cutlery"
-              type="font-awesome"
-              size={24}
-              color={tintColor}
-            />
+          drawerIcon: ({ color }) => (
+            <Icon name="cutlery" type="font-awesome" size={24} color={color} />
           ),
         }}
       />

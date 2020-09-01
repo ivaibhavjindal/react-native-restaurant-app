@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import { connect } from "react-redux";
 import {
   Text,
@@ -31,6 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
 function RenderDish(props) {
   const dish = props.dish;
 
+  const viewRef = useRef(null);
+
   const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
     if (dx < -200)
       // right to left gesture
@@ -40,6 +42,14 @@ function RenderDish(props) {
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (e, gestureState) => true,
+    onPanResponderGrant: () => {
+      viewRef.current
+        .rubberBand(1000)
+        .then((endState) =>
+          console.log(endState.finished ? "Finished" : "Cancelled")
+        )
+        .catch((err) => console.log(err));
+    },
     onPanResponderEnd: (e, gestureState) => {
       if (recognizeDrag(gestureState))
         Alert.alert(
@@ -74,6 +84,7 @@ function RenderDish(props) {
         animation="fadeInDown"
         duration={2000}
         delay={1000}
+        ref={viewRef}
         {...panResponder.panHandlers}
       >
         <Card featuredTitle={dish.name} image={{ uri: baseUrl + dish.image }}>
