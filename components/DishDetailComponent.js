@@ -36,7 +36,10 @@ function RenderDish(props) {
   const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
     if (dx < -200)
       // right to left gesture
-      return true;
+      return "rightToLeft";
+    else if (dx > 200)
+      // left to right gesture
+      return "leftToRight";
     else return false;
   };
 
@@ -51,7 +54,7 @@ function RenderDish(props) {
         .catch((err) => console.log(err));
     },
     onPanResponderEnd: (e, gestureState) => {
-      if (recognizeDrag(gestureState))
+      if (recognizeDrag(gestureState) === "rightToLeft")
         Alert.alert(
           "Add to Favorites?",
           `Are you sure you wish to add ${dish.name}`,
@@ -73,6 +76,7 @@ function RenderDish(props) {
             cancelable: false,
           }
         );
+      else if (recognizeDrag(gestureState) === "leftToRight") props.openModal();
 
       return true;
     },
