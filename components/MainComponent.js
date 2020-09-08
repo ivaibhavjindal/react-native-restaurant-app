@@ -22,6 +22,7 @@ import AboutUs from "./AboutUsComponent";
 import DishDetail from "./DishDetailComponent";
 import Reservation from "./ReservationComponent";
 import Favorites from "./FavoriteComponent";
+import Login from "./LoginComponent";
 import {
   fetchDishes,
   fetchComments,
@@ -45,6 +46,7 @@ const ContactUsStack = createStackNavigator();
 const AboutUsStack = createStackNavigator();
 const ReservationStack = createStackNavigator();
 const FavoritesStack = createStackNavigator();
+const LoginStack = createStackNavigator();
 const MainDrawer = createDrawerNavigator();
 
 const MenuNavigator = () => (
@@ -232,6 +234,35 @@ const FavoritesNavigator = () => (
   </FavoritesStack.Navigator>
 );
 
+const LoginNavigator = () => (
+  <LoginStack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#512DA8",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerLeft: ({ tintColor }) => (
+        <Icon
+          name="menu"
+          iconStyle={{ marginLeft: 10 }}
+          size={24}
+          color={tintColor}
+          onPress={navigation.toggleDrawer}
+        />
+      ),
+    })}
+  >
+    <LoginStack.Screen
+      name="Login"
+      component={Login}
+      options={{ title: "Login" }}
+    />
+  </LoginStack.Navigator>
+);
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView
@@ -254,9 +285,21 @@ const CustomDrawerContentComponent = (props) => (
 const MainNavigator = () => {
   return (
     <MainDrawer.Navigator
+      initialRouteName={"Home"}
       drawerContent={CustomDrawerContentComponent}
       drawerStyle={{ backgroundColor: "#D1C4E9" }}
     >
+      <MainDrawer.Screen
+        name="Login"
+        component={LoginNavigator}
+        options={{
+          title: "Login",
+          drawerLabel: "Login",
+          drawerIcon: ({ color }) => (
+            <Icon name="sign-in" type="font-awesome" size={24} color={color} />
+          ),
+        }}
+      />
       <MainDrawer.Screen
         name="Home"
         component={HomeNavigator}
