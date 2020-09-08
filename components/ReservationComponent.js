@@ -9,8 +9,10 @@ import {
   Button,
   Alert,
 } from "react-native";
+import { Notifications } from "expo";
 import DatePicker from "react-native-datepicker";
 import * as Animatable from "react-native-animatable";
+import * as Permissions from "expo-permissions";
 
 class ReservationForm extends Component {
   constructor(props) {
@@ -44,7 +46,10 @@ class ReservationForm extends Component {
         },
         {
           text: "Yes",
-          onPress: this.resetForm,
+          onPress: () => {
+            this.presentLocalNotification(this.state.date);
+            this.resetForm();
+          },
         },
       ],
       {
@@ -58,6 +63,40 @@ class ReservationForm extends Component {
       guests: 1,
       smoking: false,
       date: "",
+    });
+  }
+
+  async obtainNotificationPermission() {
+    let permission = await Permissions.getAsync(
+      Permissions.USER_FACING_NOTIFICATIONS
+    );
+    if (permission.status !== "granted") {
+      permission = await Permissions.askAsync(
+        Permissions.USER_FACING_NOTIFICATIONS
+      );
+      if (permission.status !== "granted") {
+        Alert.alert("Permission not granted to show notifications");
+      }
+    }
+    return permission;
+  }
+
+  async presentLocalNotification(date) {
+    await this.obtainNotificationPermission();
+    Notifications.createChannelAndroidAsync("confusion", {
+      name: "confusion",
+      sound: true,
+      vibrate: true,
+    });
+    Notifications.presentLocalNotificationAsync({
+      title: "Your Reservation",
+      body: `Reservation for ${date} requested`,
+      ios: {
+        sound: true,
+      },
+      android: {
+        color: "#512DA8",
+      },
     });
   }
 
