@@ -15,6 +15,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Menu from "./MenuComponent";
 import Home from "./HomeComponent";
 import ContactUs from "./ContactUsComponent";
@@ -22,7 +23,7 @@ import AboutUs from "./AboutUsComponent";
 import DishDetail from "./DishDetailComponent";
 import Reservation from "./ReservationComponent";
 import Favorites from "./FavoriteComponent";
-import Login from "./LoginComponent";
+import { Login, Register } from "./LoginComponent";
 import {
   fetchDishes,
   fetchComments,
@@ -47,6 +48,7 @@ const AboutUsStack = createStackNavigator();
 const ReservationStack = createStackNavigator();
 const FavoritesStack = createStackNavigator();
 const LoginStack = createStackNavigator();
+const LoginTab = createBottomTabNavigator();
 const MainDrawer = createDrawerNavigator();
 
 const MenuNavigator = () => (
@@ -234,6 +236,48 @@ const FavoritesNavigator = () => (
   </FavoritesStack.Navigator>
 );
 
+const LoginTabNavigator = () => (
+  <LoginTab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: "#9575CD",
+      inactiveBackgroundColor: "#D1C4E9",
+      activeTintColor: "white",
+      inactiveTintColor: "gray",
+    }}
+  >
+    <LoginTab.Screen
+      name="Login"
+      component={Login}
+      options={{
+        title: "Login",
+        tabBarIcon: ({ color }) => (
+          <Icon
+            name="sign-in"
+            type="font-awesome"
+            size={24}
+            iconStyle={{ color: color }}
+          />
+        ),
+      }}
+    />
+    <LoginTab.Screen
+      name="Register"
+      component={Register}
+      options={{
+        title: "Register",
+        tabBarIcon: ({ color }) => (
+          <Icon
+            name="user-plus"
+            type="font-awesome"
+            size={24}
+            iconStyle={{ color: color }}
+          />
+        ),
+      }}
+    />
+  </LoginTab.Navigator>
+);
+
 const LoginNavigator = () => (
   <LoginStack.Navigator
     screenOptions={({ navigation }) => ({
@@ -257,7 +301,7 @@ const LoginNavigator = () => (
   >
     <LoginStack.Screen
       name="Login"
-      component={Login}
+      component={LoginTabNavigator}
       options={{ title: "Login" }}
     />
   </LoginStack.Navigator>
